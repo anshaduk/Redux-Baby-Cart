@@ -1,0 +1,18 @@
+.admindiv{
+    width: 500px;
+    height: 400px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(103, 199, 228);
+    margin-left: 400px;
+}
+.btn1{
+    width: 160px;
+    height: 40px;
+    /* margin-left: -20px; */
+    margin-top: 170px;
+
+}
+/* body{
+    background-image: url('https://cdn1.vectorstock.com/i/1000x1000/37/50/chart-vector-113750.jpg');
+} */
