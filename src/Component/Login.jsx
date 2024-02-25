@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Userside } from "../App";
 import loginpic1 from "../assets/loginpic1.jpg";
 import "./Login.css";
+import { loginUser } from "../Redux/loginSlice";
 import {
   MDBContainer,
   MDBRow,
@@ -10,12 +11,16 @@ import {
   MDBIcon,
   MDBInput,
 } from "mdb-react-ui-kit";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
   const nav = useNavigate();
-  const { data, setData, setUser } = useContext(Userside);
+   const { data, setData, setUser } = useContext(Userside);
   const inputref = useRef(null);
 
+  const dispatch=useDispatch()
+  //const {data}=useSelector(state=>state.sighnup)
+  console.log(data);
   //to check registered user is logged in
   const submit = (e) => {
     e.preventDefault();
@@ -23,11 +28,13 @@ function Login() {
     let logpassword = inputref.current.logpassword.value;
     let userData = data.find((item) => item.email == logemail);
     if (userData && userData.password == logpassword) {
-      setUser(userData);
+       setUser(userData);
+      //dispatch(loginUser(userData))
       nav('/profile')
       //nav("/");
     } else {
       setUser(null);
+      //loginUser(null)
       alert("invalid user");
     }
   };

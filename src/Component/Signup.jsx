@@ -2,6 +2,10 @@ import React, { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Userside } from "../App";
 import "./Signup.css";
+import { addSighnupUser } from "../Redux/sighnupSlice";
+import { useDispatch } from "react-redux";
+
+
 import {
   MDBContainer,
   MDBRow,
@@ -17,6 +21,9 @@ function Signup() {
   const { data, setData } = useContext(Userside);
   const move = useNavigate();
 
+  //Redux
+const dispatch=useDispatch();
+
   //to receive user data and store into setData
   const handlesubmit = () => {
     
@@ -24,18 +31,20 @@ function Signup() {
     let email = inputref.current.email.value;
     let password = inputref.current.password.value;
     let conpassword = inputref.current.conpassword.value;
-    console.log(username, email, password);
-    console.log(data, "data");
-    setData([...data, { username, email, password }]);
+    // console.log(username, email, password);
+    // console.log(data, "data");
+    //setData([...data, { username, email, password }]);
+    dispatch(addSighnupUser([{ username, email, password }]))
 
     if (password === conpassword) {
-      setData([
-        ...data,
-        { username: username, email: email, password: password, cart: [] },
-      ]);
+      // setData([
+      //   ...data,
+      //   { username: username, email: email, password: password, cart: [] },
+      // ]);
+      addSighnupUser([{ username: username, email: email, password: password, cart: [] }])
        move('/login')
-      console.log(data, "data");
-      console.log(username, email, "profile");
+      // console.log(data, "data");
+      // console.log(username, email, "profile");
 
       //move("/profile");
     } else {
@@ -46,7 +55,7 @@ function Signup() {
   const handlesubmitform = (e) => {
     e.preventDefault();
   };
-  console.warn(data);
+  //console.warn(data);
   return (
     <div className="maindiv">
       <form action="" ref={inputref} onSubmit={handlesubmitform}>

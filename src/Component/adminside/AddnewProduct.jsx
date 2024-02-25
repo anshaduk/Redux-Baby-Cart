@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import {  useDispatch } from "react-redux";
+import { addNewProduct } from "../../Redux/adminProductSlice";
 
 import {
   MDBRow,
@@ -11,21 +13,29 @@ import {
 import { Userside } from "../../App";
 import { useNavigate } from "react-router-dom";
 
+
 const handle =(e)=>{
   e.preventDefault()
 }
 const AddnewProduct = () => {
   const nav=useNavigate();
+  const dispatch=useDispatch();
   const { products,setProducts } =useContext(Userside);
   const [addingProduct, setAddingProduct] = useState(false);
   // console.log(addingProduct,"adding product");
   const [newProduct, setNewProduct] = useState({
-    name: "",
+    //name: "",
     title: "",
     description: "",
     price: 0,
     image: "",
   });
+
+  const handleAddNewProduct=()=>{
+    dispatch(addNewProduct(newProduct))
+    nav('/products')
+  }
+
   console.log(newProduct);
   return (
     <form style={{ margin: "30px" }} onSubmit={handle}>
@@ -67,17 +77,18 @@ const AddnewProduct = () => {
         className="mb-4"
         type="submit"
         block
-        onClick={() => {
-          setAddingProduct(false);
-          newProduct.name !== "" &&
-            newProduct.title !== "" &&
-            newProduct.description !== "" &&
-            newProduct.price !== 0;
-          newProduct.image !== ""
-            ? setProducts([...products,newProduct])
-            : alert("Please Complete the deatails");
-        }}
-      >
+        onClick={handleAddNewProduct}
+        //onClick={() => {
+      //     setAddingProduct(false);
+      //     newProduct.name !== "" &&
+      //       newProduct.title !== "" &&
+      //       newProduct.description !== "" &&
+      //       newProduct.price !== 0;
+      //     newProduct.image !== ""
+      //       ? setProducts([...products,newProduct])
+      //       : alert("Please Complete the deatails");
+       //  }}
+       >
         Added To List
         
       </MDBBtn>

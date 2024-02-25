@@ -30,28 +30,7 @@ const Products = () => {
   const { title } = useParams();
   const { search, products, setProducts } = useContext(Userside);
   
-  // const [newProduct, setNewProduct] = useState({
-  //   Name: "",
-  //   Gender: "",
-  //   Type: "",
-  //   Purchase: 1,
-  //   price: 0,
-  //   img: "",
-  // });
-
-  // const handleChange = (id) => {
-  //   if (event.target.value !== "" && event.target.name !== "price") {
-  //     setUpdatedProduct({
-  //       ...updatedProduct,
-  //       [event.target.name]: event.target.value,
-  //     });
-  //   } else if (event.target.value !== "" && event.target.name === "price") {
-  //     setUpdatedProduct({
-  //       ...updatedProduct,
-  //       price: Number(event.target.value),
-  //     });
-  //   } 
-  // };
+  
   
   console.log(products, "gggg");
   const filtering = products.filter((product) => product.title == title);
