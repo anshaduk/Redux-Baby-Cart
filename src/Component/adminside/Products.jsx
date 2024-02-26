@@ -25,22 +25,26 @@ import {
 import { Userside } from "../../App";
 import AdminNavBar from "./AdminNavBar";
 
+import { useDispatch, useSelector } from "react-redux";
+import {remove} from "../../Redux/adminProductSlice";
+
 const Products = () => {
   const nav = useNavigate();
   const { title } = useParams();
-  const { search, products, setProducts } = useContext(Userside);
-  
+  //const { search, products, setProducts } = useContext(Userside);
+  const products=useSelector(state=>state.admin.items)
+  const dispatch=useDispatch();
   
   
   console.log(products, "gggg");
   const filtering = products.filter((product) => product.title == title);
   console.log(filtering);
 
-  const DeleteProduct = (Index) => {
-    const UpdatedUserData = [...products];
-    UpdatedUserData.splice(Index, 1);
-    setProducts(UpdatedUserData);
+
+  const DeleteProduct = (index) => {
+    dispatch(remove(index));
   };
+ 
   return (
     <div>
       <AdminNavBar />
@@ -144,7 +148,7 @@ const Products = () => {
                     color="link"
                     rounded
                     size="sm"
-                    onClick={() => DeleteProduct()}
+                    onClick={() => DeleteProduct(Index)}
                   >
                     Delete
                   </MDBBtn>

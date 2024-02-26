@@ -36,7 +36,7 @@ const AddnewProduct = () => {
     nav('/products')
   }
 
-  console.log(newProduct);
+  console.log(newProduct,"hello");
   return (
     <form style={{ margin: "30px" }} onSubmit={handle}>
       
