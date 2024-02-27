@@ -8,19 +8,24 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {remove} from "../../Redux/loginSlice";
 
 const UserData = () => {
   const nav = useNavigate();
-  const { data, setData, user, setUser, render, setRender ,add, setAdd } = useContext(Userside);
-  console.log(data, "userdata");
-  console.log(data[0].title,"setAdd");
-  console.log(data[0].id,"setAdd");
+  const dispatch=useDispatch();
+  const data=useSelector(state=>state.login)
+  //const { data, setData, user, setUser, render, setRender ,add, setAdd } = useContext(Userside);
+   console.log(data, "userdata");
+  // console.log(data[0].title,"setAdd");
+  // console.log(data[0].id,"setAdd");
 
   
-  const DeleteUser = (Index) => {
-    const UpdatedUserData = [...data];
-    UpdatedUserData.splice(Index, 1);
-    setData(UpdatedUserData);
+  const DeleteUser = (index) => {
+    // const UpdatedUserData = [...data];
+    // UpdatedUserData.splice(Index, 1);
+    // setData(UpdatedUserData);
+    dispatch(remove(index))
   };
 
   return (
@@ -66,7 +71,7 @@ const UserData = () => {
                   color="link"
                   rounded
                   size="sm"
-                  onClick={() => DeleteUser()}
+                  onClick={() => DeleteUser(Index)}
                 >
                   Delete
                 </MDBBtn>

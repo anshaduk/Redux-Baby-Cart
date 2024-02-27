@@ -13,12 +13,14 @@ import {
 } from "mdb-react-ui-kit";
 import { Userside } from "../App";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const navigate = useNavigate;
-  const { data, setData, user } = useContext(Userside);
+  const data=useSelector(state=>state.login)
+  //const { data, setData, user } = useContext(Userside);
   console.log(data, "data");
-  console.log(user, "profile");
+  //console.log(user, "profile");
 
 
   return (

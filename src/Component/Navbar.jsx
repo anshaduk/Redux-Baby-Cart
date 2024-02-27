@@ -10,11 +10,15 @@ import { BsCart3 } from "react-icons/bs";
 import { Userside } from "../App";
 import { IoLogOut } from "react-icons/io5";
 import { FaUserNinja } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 const Navbars = () => {
   const nav = useNavigate();
-  const { add, user, render, setUser, search, setSearch, products } =
-    useContext(Userside);
+  const user=useSelector(state=>state.login[0])
+  console.log(user,"user name");
+  //const { add, user, render, setUser, search, setSearch, products } =
+   // useContext(Userside);
+    const { add, render, setUser, search, setSearch, products } = useContext(Userside);
 
   //to perform logout
   const logout = () => {
@@ -102,7 +106,7 @@ const Navbars = () => {
               style={{ width: "45px", height: "40px" }}
               onClick={() =>!user?nav('/login'):nav("/cart")}
             />
-            {user && user.cart.length}
+            {/* {user && user.cart.length} */}
             {!user ? (
               <FaUserAlt
                 onClick={() => nav("/login")}
@@ -114,7 +118,7 @@ const Navbars = () => {
                   onClick={logout}
                   style={{ width: "45px", height: "40px" }}
                 />
-                <p>{user.username}</p>
+                {user&&<p>{user.username}</p>}
               </>
             )}
             <FaUserNinja

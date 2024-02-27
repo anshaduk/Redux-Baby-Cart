@@ -15,26 +15,29 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
   const nav = useNavigate();
-   const { data, setData, setUser } = useContext(Userside);
+   //const { data, setData, setUser } = useContext(Userside);
   const inputref = useRef(null);
 
   const dispatch=useDispatch()
-  //const {data}=useSelector(state=>state.sighnup)
-  console.log(data);
+  const sighnupData=useSelector(state=>state.sighnup)
+  console.log(sighnupData,"login slice");
   //to check registered user is logged in
   const submit = (e) => {
     e.preventDefault();
     let logemail = inputref.current.logemail.value;
+    
     let logpassword = inputref.current.logpassword.value;
-    let userData = data.find((item) => item.email == logemail);
+    
+    let userData = sighnupData.flat().find((item) => item.email == logemail);
+    console.log(userData,"login user");
     if (userData && userData.password == logpassword) {
-       setUser(userData);
-      //dispatch(loginUser(userData))
+       //setUser(userData);
+      dispatch(loginUser(userData))
       nav('/profile')
       //nav("/");
     } else {
-      setUser(null);
-      //loginUser(null)
+      //setUser(null);
+      dispatch(loginUser(null))
       alert("invalid user");
     }
   };
